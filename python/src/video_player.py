@@ -46,8 +46,16 @@ class VideoPlayer:
             if video.get_playing_state():
                 current_video = video
 
+        if current_video and video_to_be_played is None:
+            # print(f"Stopping video: {current_video.title}")
+            # current_video.set_playing_state(False)
+            print(f"Cannot play video: Video does not exist")
+
+        elif video_to_be_played is None:
+            print(f"Cannot play video: Video does not exist")
+
         # checking if there is a current video playing and playing the specified one
-        if current_video or (current_video and not current_video.get_playing_state()):
+        elif current_video or (current_video and not current_video.get_playing_state()):
             print(f"Stopping video: {current_video.title}")
             current_video.set_playing_state(False)
 
@@ -59,9 +67,6 @@ class VideoPlayer:
             current_video = video_to_be_played
             current_video.set_playing_state(True)
             print(f"Playing video: {video_to_be_played.title}")
-
-        if video_to_be_played is None:
-            print("Cannot play video: Video does not exist")
 
     def stop_video(self):
         """Stops the current video."""
@@ -77,7 +82,7 @@ class VideoPlayer:
             current_video = None
 
         else:
-            print("Cannot stop video: No video is currently playing")
+            print(f"Cannot stop video: No video is currently playing")
 
     def play_random_video(self):
         """Plays a random video from the video library."""
@@ -85,7 +90,7 @@ class VideoPlayer:
         random_video = random.choice(library_videos)
 
         if not library_videos:
-            print(" No videos available")
+            print(f" No videos available")
         elif current_video:
             print(f"Stopping video: {current_video.title}")
             current_video.set_playing_state(False)
@@ -95,27 +100,25 @@ class VideoPlayer:
             current_video.set_playing_state(True)
             print(f"Playing video: {random_video.title}")
 
-
     def pause_video(self):
         """Pauses the current video."""
 
         global current_video
         if not current_video:
-            print("No video is playing!")
+            print(f"No video is playing!")
         elif current_video and not current_video.get_playing_state():
             print(f"Video already paused: {current_video.title}")
         else:
             print(f"Pausing video: {current_video.title}")
             current_video.set_playing_state(False)
 
-
     def continue_video(self):
         """Resumes playing the current video."""
         global current_video
         if not current_video:
-            print("No video is playing!")
+            print(f"No video is playing!")
         elif current_video and current_video.get_playing_state():
-            print("Current video is not paused!")
+            print(f"Current video is not paused!")
         else:
             print(f"Continuing video{current_video.title}")
             current_video.set_playing_state(True)
@@ -123,7 +126,12 @@ class VideoPlayer:
     def show_playing(self):
         """Displays video currently playing."""
 
-        print("show_playing needs implementation")
+        if not current_video:
+            print(f"No video is currently playing")
+        elif current_video and current_video.get_playing_state():
+            print(f"Currently playing: {current_video.title} ({current_video.video_id}) [{' '.join(current_video.tags)}]")
+        else:
+            print(f"Currently playing: {current_video.title} ({current_video.video_id}) [{' '.join(current_video.tags)}] - PAUSED")
 
     def create_playlist(self, playlist_name):
         """Creates a playlist with a given name.
