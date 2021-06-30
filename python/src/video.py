@@ -18,6 +18,8 @@ class Video:
         # Excel
         self._is_playing = False
 
+        self._is_flagged = False
+
     @property
     def title(self) -> str:
         """Returns the title of a video."""
@@ -39,3 +41,9 @@ class Video:
 
     def set_playing_state(self, state):
         self._is_playing = state
+
+    def get_flag(self):
+        return self._is_flagged
+
+    def set_flag(self, flag: bool):
+        self._is_flagged = flag
