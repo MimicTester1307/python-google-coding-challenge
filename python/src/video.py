@@ -15,6 +15,9 @@ class Video:
         # in case the caller changes the 'video_tags' they passed to us
         self._tags = tuple(video_tags)
 
+        # Excel
+        self._is_playing = False
+
     @property
     def title(self) -> str:
         """Returns the title of a video."""
@@ -29,3 +32,10 @@ class Video:
     def tags(self) -> Sequence[str]:
         """Returns the list of tags of a video."""
         return self._tags
+
+    # Excel
+    def get_playing_state(self):
+        return self._is_playing
+
+    def set_playing_state(self, state):
+        self._is_playing = state
