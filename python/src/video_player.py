@@ -4,6 +4,7 @@ import random
 from .video_library import VideoLibrary
 
 
+# function key for sorting list of videos
 def sort_by_title(video):
     return video.title
 
@@ -46,7 +47,7 @@ class VideoPlayer:
                 current_video = video
 
         # checking if there is a current video playing and playing the specified one
-        if current_video:
+        if current_video or (current_video and not current_video.get_playing_state()):
             print(f"Stopping video: {current_video.title}")
             current_video.set_playing_state(False)
 
@@ -73,6 +74,8 @@ class VideoPlayer:
         if current_video:
             current_video.set_playing_state(False)
             print(f"Stopping video: {current_video.title}")
+            current_video = None
+
         else:
             print("Cannot stop video: No video is currently playing")
 
@@ -96,12 +99,26 @@ class VideoPlayer:
     def pause_video(self):
         """Pauses the current video."""
 
-        print("pause_video needs implementation")
+        global current_video
+        if not current_video:
+            print("No video is playing!")
+        elif current_video and not current_video.get_playing_state():
+            print(f"Video already paused: {current_video.title}")
+        else:
+            print(f"Pausing video: {current_video.title}")
+            current_video.set_playing_state(False)
+
 
     def continue_video(self):
         """Resumes playing the current video."""
-
-        print("continue_video needs implementation")
+        global current_video
+        if not current_video:
+            print("No video is playing!")
+        elif current_video and current_video.get_playing_state():
+            print("Current video is not paused!")
+        else:
+            print(f"Continuing video{current_video.title}")
+            current_video.set_playing_state(True)
 
     def show_playing(self):
         """Displays video currently playing."""
