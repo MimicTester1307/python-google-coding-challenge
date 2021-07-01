@@ -279,7 +279,13 @@ class VideoPlayer:
         Args:
             search_term: The query to be used in search.
         """
-        print("search_videos needs implementation")
+        # I would have used binary search, but since the data is small, I'll use linear  search
+        # video_titles = []
+        # for video in library_videos:
+        #     video_titles.append(video.title)
+        # for title in video_titles:
+        #     if search_term.lower() in video_titles[title].lower():
+        #         print
 
     def search_videos_tag(self, video_tag):
         """Display all videos whose tags contains the provided tag.
