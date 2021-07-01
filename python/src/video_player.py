@@ -132,7 +132,7 @@ class VideoPlayer:
         else:
             print(f"Currently playing: {current_video.title} ({current_video.video_id}) [{' '.join(current_video.tags)}] - PAUSED")
 
-    def create_playlist(self, playlist_name: str):
+    def create_playlist(self, playlist_name):
         """Creates a playlist with a given name.
 
         Args:
@@ -140,11 +140,12 @@ class VideoPlayer:
         """
         # Checking fot white space in name
         if ' ' in playlist_name.lower():
-            print(f"Cannot create playlist: {playlist_name} is not a valid name.")
+            print(f"Cannot create playlist: {playlist_name} is not a valid name")
 
         # checking if playlist already exists
-        elif playlist_name.lower() in playlists.keys():
+        elif playlist_name.lower() in list(playlists.keys()):
             print(f"Cannot create playlist: A playlist with the same name already exists")
+
         # creating playlist if conditions are met
         else:
             playlists[playlist_name.lower()] = []
