@@ -255,7 +255,11 @@ class VideoPlayer:
         Args:
             playlist_name: The playlist name.
         """
-        print("clears_playlist needs implementation")
+        if playlist_name.lower() not in playlists.keys():
+            print(f"Cannot clear playlist {playlist_name}: Playlist does not exist")
+        else:
+            print(f"Successfully removed all videos from {playlist_name}")
+            playlists[playlist_name.lower()].clear()
 
     def delete_playlist(self, playlist_name):
         """Deletes a playlist with a given name.
@@ -263,7 +267,11 @@ class VideoPlayer:
         Args:
             playlist_name: The playlist name.
         """
-        print("deletes_playlist needs implementation")
+        if playlist_name.lower() not in playlists.keys():
+            print(f"Cannot delete playlist {playlist_name}: Playlist does not exist")
+        else:
+            playlists.pop(playlist_name.lower())
+            print(f"Deleted playlist: {playlist_name}")
 
     def search_videos(self, search_term):
         """Display all the videos whose titles contain the search_term.
